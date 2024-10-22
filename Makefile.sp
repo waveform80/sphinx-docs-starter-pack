@@ -13,7 +13,7 @@ SOURCEDIR     = .
 METRICSDIR    = $(SOURCEDIR)/metrics
 BUILDDIR      = _build
 VENVDIR       = $(SPHINXDIR)/venv
-PA11Y         = $(SPHINXDIR)/node_modules/pa11y/bin/pa11y.js --config $(SPHINXDIR)/pa11y.json
+PA11YCI       = $(SPHINXDIR)/node_modules/pa11y-ci/bin/pa11y-ci.js --config $(SPHINXDIR)/pa11y-ci.json
 VENV          = $(VENVDIR)/bin/activate
 TARGET        = *
 ALLFILES      =  *.rst **/*.rst
@@ -58,10 +58,10 @@ sp-woke-install:
             { echo "Installing \"woke\" snap... \n"; sudo snap install woke; }
 
 sp-pa11y-install:
-	@type $(PA11Y) >/dev/null 2>&1 || { \
-			echo "Installing \"pa11y\" from npm... \n"; \
+	@type $(PA11YCI) >/dev/null 2>&1 || { \
+			echo "Installing \"pa11y-ci\" from npm... \n"; \
 			mkdir -p $(SPHINXDIR)/node_modules/ ; \
-			npm install --prefix $(SPHINXDIR) pa11y; \
+			npm install --prefix $(SPHINXDIR) pa11y-ci; \
 		}
 
 sp-install: $(VENVDIR)
@@ -105,7 +105,7 @@ sp-woke: sp-woke-install
 	    -c https://github.com/canonical/Inclusive-naming/raw/main/config.yml
 
 sp-pa11y: sp-pa11y-install sp-html
-	find $(BUILDDIR) -name *.html -print0 | xargs -n 1 -0 $(PA11Y)
+	$(PA11YCI) $(shell find $(BUILDDIR) -name *.html)
 
 sp-vale: sp-install
 	@. $(VENV); test -d $(SPHINXDIR)/venv/lib/python*/site-packages/vale || pip install vale
