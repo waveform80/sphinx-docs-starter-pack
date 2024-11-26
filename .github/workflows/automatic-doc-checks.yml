@@ -14,7 +14,8 @@ concurrency:
 jobs:
   documentation-checks:
     uses: secondskoll/documentation-workflows/.github/workflows/documentation-checks.yaml@main
+    runs-on: [self-hosted, Linux, amd64, noble]
     with:
       working-directory: "sp-docs"
       fetch-depth: 0
-      runs-on: "self-hosted, Linux, amd64, noble"
+      
