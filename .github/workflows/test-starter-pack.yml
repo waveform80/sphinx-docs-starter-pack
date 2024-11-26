@@ -12,7 +12,7 @@ on:
 jobs:
   test-root:
     name: Test in root folder
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, amd64, noble]
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
