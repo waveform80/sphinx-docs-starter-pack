@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   documentation-checks:
-    uses: secondskoll/documentation-workflows/.github/workflows/documentation-checks.yaml@test
+    uses: canonical/documentation-workflows/.github/workflows/documentation-checks.yaml@test
     with:
       working-directory: "sp-docs"
       fetch-depth: 0
